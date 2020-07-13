@@ -434,7 +434,7 @@ Asterístico não serve apenas para file globbing, também para:
 
 > Saída:
 
-![](Screenshot-file_globbing.png)
+![](images/Screenshot-file_globbing.png)
 
 
 # Aspas
@@ -443,19 +443,19 @@ Asterístico não serve apenas para file globbing, também para:
 
 Shell interpreta os comandos especiais, exemplo:
 
-![](Linux-doubleQuoting.png)
+![](images/Linux-doubleQuoting.png)
 
 ## Aspas simples
 
 Shell interpeta de modo LITERAL , exemplo:
 
-![](Linux-singleQuoting.png)
+![](images/Linux-singleQuoting.png)
 
 ## Deixando a string em modo literal
 
 > Coloca-se contrabarra (\\) antes do caractere especial 
 
-![](Linux-quotingEspecial.png)
+![](images/Linux-quotingEspecial.png)
 
 
 
