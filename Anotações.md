@@ -361,8 +361,168 @@ Para saber qual runlevel estou: ``runlevel``
 
 ``uname -a``: Mostra tudo
 
+# Scripts de inicialização
+
+Existem tipos de shell's :
+
+* Shell login: Login realizado no sistema. Inserindo usuário e senha.
+
+* Shell non login: Normalmente utilizado em scripts. **Não** necessário passar a senha e usuário, exemplos:
+
+    * Ao logar-se em ambiente desktop e posteriormente abrir um terminal gráfico, é um non login.
+
+    * Scripts automatizados (Cron, Rsync...)
+
+* Shell interativo : Quando é interagido manualmente, **interagindo**. Quando eu recebo STDOUT ou STDERR como retorno de alguma inserção de dados. 
+
+* Shell não interativo : Quando não é necessário interagir manualmente, inserindo dados. Scripts utilizam esse tipo.
+
+Exemplo: **Shell não interativo non login** = Execução de algum script / script diário/semanal/mensal..
+
+Os scripts de inicialização são diferentes em cada um.
+
+## Shell non login
+
+1. ~/.bashrc
+2. bashrc chama /etc/bash.bashrc *ou* /etc/bashrc
+3. /etc/bashrc chama e executa todos scripts de /etc/profile.d/*
+
+## Shell de login
+
+**/etc/profile**
+
+1. **~/.bash_profile** : Caso não encontre ele procura o passo 2
+
+2. **~/.bash_login** : Caso não encontre ele procura o passo 3
+
+3. **~/.profile** 
+
+
+
+## Ordem de inicialização de scripts
+
+> Para shell não interativo
+
+1. É executado o arquivo "/etc/profile" (**Executado em interativo e não interativo**)
+2. É executado o "~/.bashrc"
+
+# Variáveis
+
+Existem dois tipos de variáveis:
+
+* Globais : Transforma as variáveis locais em globais , com o comando **export**. **env** para ver as variáveis ambiente (globais)
+
+* Locais : **set**, aplicáveis apenas na sessão do bash
+
+Exemplo:
+
+``export PATH=$PATH:/opt``
+
+# File Globbing
+
+* Asterístico : Tudo
+* Interrogação: Apenas um
+* Lista de dígitos : Caracteres válidos na busca, utiliza-se **[]**
+
+Exemplo: Padrão para o arquivo **weatherreport1996-2017.csv**
+
+``ls [wW]eather[rR]eport199[0-9]?201[0-9]*.csv``
+
+Asterístico não serve apenas para file globbing, também para:
+
+``ls /var/log/*``
+
+> Saída:
+
+![](Screenshot-file_globbing.png)
+
+
+# Aspas
+
+## Aspas duplas
+
+Shell interpreta os comandos especiais, exemplo:
+
+![](Linux-doubleQuoting.png)
+
+## Aspas simples
+
+Shell interpeta de modo LITERAL , exemplo:
+
+![](Linux-singleQuoting.png)
+
+## Deixando a string em modo literal
+
+> Coloca-se contrabarra (\\) antes do caractere especial 
+
+![](Linux-quotingEspecial.png)
+
+
+
+# Detalhamento shell
+
+Composto por: **nome**@**hostname**:**diretório**$ / #
+
+Hostname definido em */etc/hostname*
+
+Novo método para trocar hostname: **hostnamectl set-hostname <hostname>**
+
+# Encontrar arquivos
+
+* **locate**: Realiza busca através de cache , para atualizar o cache é necessário atualizar o banco, 
+
+    * sudo updatedb 
+
+* **find** [diretorio] [argumentos]
+
+    * find / -name "findme.txt"
+    * find / -iname "FINDME.txt"
+    
+        * O parâmetro "-iname" é case-sensitive, o -name não.
+
+# Manuais & Documentações
+
+**man** [parâmetro]
+
+---
+
+O manual é dividido por seções, para padronizar os manuais dos softwares do sistema linux, são divididos em:
+
+1. Comandos shell ou executáveis
+2. System calls (chamadas de sistemas)
+3. Chamadas de bibliotecas
+4. Arquivos especiais (normalmente em /dev)
+5. Formatos de arquivos e convenções (ex: /etc/passwd)
+6. Jogos
+7. Miscelânia
+8. Comandos de administração de sistemas
+9. Rotinas do kernel
+
+Exemplo: 
+
+* man -k tty  **OU** apropos tty
+
+    * Busca por palavra-chave contendo na descrição ou nome
+
+* man -f tty  **OU** whatis tty
+
+    * Busca *exatamante* o nome , não que contenha na descrição de outros...
+
+## Acessando X página do manual
+
+``man 5 passwd``
+
+``man 4 tty``
+
+---
+
+## Info
+
+O comando info é para ver documentações , porém seu diferencial é para abrir *hyperlinks* 
 
 
 # Referência
 
-[Curso preparatório de Mateus Miller](https://www.udemy.com/course/lpi-linux-essentials)
+* [Curso preparatório de Mateus Miller](https://www.udemy.com/course/lpi-linux-essentials)
+
+* Documentação própria do sistema (*man* / *info*)
