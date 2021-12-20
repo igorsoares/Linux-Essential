@@ -2,7 +2,6 @@
 
 Arquivo para armazenar as anotações sobre conteúdos para a prova "Linux Essential"
 
-
 ## Free Software & Open Source
 
 ### Open source
